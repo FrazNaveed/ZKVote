@@ -41,8 +41,9 @@ function Home({ proveKeyString, programString }: HomeProps) {
 
   async function fetchVote() {
     if (typeof window.ethereum !== "undefined") {
-      // const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const provider = getProvider();
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      // const provider = getProvider();
+
       const contract = new ethers.Contract(
         getVoteAddress(),
         VoteEvenOrOdd.abi,
@@ -111,7 +112,7 @@ function Home({ proveKeyString, programString }: HomeProps) {
           inputs
         );
         const receipt = await transaction.wait();
-        setTxUrl(`https://ropsten.etherscan.io/tx/${receipt.transactionHash}`);
+        setTxUrl(`https://hekla.taikoscan.io/tx/${receipt.transactionHash}`);
         fetchVote();
       } catch (e) {
         console.log("Error", e);

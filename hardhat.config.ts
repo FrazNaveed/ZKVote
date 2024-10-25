@@ -25,6 +25,16 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
   networks: {
+    localhost: {
+      url: "http://127.0.0.1:8545",
+    },
+
+    taiko: {
+      url: "https://rpc.hekla.taiko.xyz",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
       accounts:
